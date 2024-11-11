@@ -3,6 +3,7 @@ import { createStackNavigator } from '@react-navigation/stack'
 import HomeScreen from './screens/HomeScreen'
 import store from "./app/store"
 import { Provider } from 'react-redux'
+import AdminScreen from './screens/AdminScreen'
 
 const Stack = createStackNavigator()
 
@@ -12,6 +13,7 @@ export default function App() {
       <NavigationContainer>
         <Stack.Navigator>
           <Stack.Screen name="Home" component={HomeScreen} />
+          <Stack.Screen name="Admin" component={AdminScreen} />
         </Stack.Navigator>
       </NavigationContainer>
     </Provider>

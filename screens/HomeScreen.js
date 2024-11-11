@@ -1,10 +1,12 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchBikes } from '../app/bikeSlice'
-import { View, Text, Image, FlatList, StyleSheet } from 'react-native'
+import { View, Text, Image, FlatList, StyleSheet, Button } from 'react-native'
+import { useNavigation } from '@react-navigation/native'
 
 export default function HomeScreen() {
   const dispatch = useDispatch()
+  const navigation = useNavigation()
   const { items: bikes, loading, error } = useSelector((state) => state.bikes)
 
   useEffect(() => {
@@ -28,13 +30,16 @@ export default function HomeScreen() {
   )
 
   return (
-    <FlatList
-      data={bikes}
-      renderItem={renderItem}
-      keyExtractor={(item) => item._id.toString()}
-      numColumns={2}
-      contentContainerStyle={styles.container}
-    />
+    <View style={{ flex: 1 }}>
+      <FlatList
+        data={bikes}
+        renderItem={renderItem}
+        keyExtractor={(item) => item._id}
+        numColumns={2}
+        contentContainerStyle={styles.container}
+      />
+      <Button title="Go to Admin Screen" onPress={() => navigation.navigate('Admin')} />
+    </View>
   )
 }
 
