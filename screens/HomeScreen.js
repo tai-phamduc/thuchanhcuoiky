@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { fetchBikes } from '../app/bikeSlice'
 import { View, Text, Image, FlatList, StyleSheet, Button } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
+import { SafeAreaView } from 'react-native-safe-area-context'
 
 export default function HomeScreen() {
   const dispatch = useDispatch()
@@ -30,7 +31,8 @@ export default function HomeScreen() {
   )
 
   return (
-    <View style={{ flex: 1 }}>
+    <SafeAreaView style={{ flex: 1 }}>
+      <Text style={{ marginLeft: 20, fontSize: 24, fontWeight: 'bold', color: "red" }}>The world's best bike</Text>
       <FlatList
         data={bikes}
         renderItem={renderItem}
@@ -39,7 +41,7 @@ export default function HomeScreen() {
         contentContainerStyle={styles.container}
       />
       <Button title="Go to Admin Screen" onPress={() => navigation.navigate('Admin')} />
-    </View>
+    </SafeAreaView>
   )
 }
 

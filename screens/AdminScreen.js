@@ -4,6 +4,8 @@ import * as ImagePicker from 'expo-image-picker'
 import { useDispatch } from 'react-redux'
 import axios from 'axios'
 import { fetchBikes } from '../app/bikeSlice'
+import { SafeAreaView } from 'react-native-safe-area-context'
+import { useNavigation } from '@react-navigation/native'
 
 const API_URL = 'https://67319cf77aaf2a9aff11341c.mockapi.io/bike'
 const CLOUDINARY_URL = 'https://api.cloudinary.com/v1_1/dqhbikdg0/image/upload'
@@ -15,6 +17,8 @@ export default function AdminScreen() {
   const [name, setName] = useState('')
   const [price, setPrice] = useState('')
   const [image, setImage] = useState(null) // URI of the selected image
+
+  const navigation = useNavigation()
 
   // Function to handle image selection
   const pickImage = async () => {
@@ -90,7 +94,10 @@ export default function AdminScreen() {
   }
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
+      <TouchableOpacity onPress={() => navigation.goBack()} style={{ paddingVertical: 16 }}>
+        <Text>Go back</Text>
+      </TouchableOpacity>
       <Text style={styles.title}>Add New Bike</Text>
       <TextInput
         style={styles.input}
@@ -115,7 +122,7 @@ export default function AdminScreen() {
       )}
 
       <Button title="Add Bike" onPress={handleSubmit} />
-    </View>
+    </SafeAreaView>
   )
 }
 
